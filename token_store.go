@@ -135,12 +135,12 @@ func (s *TokenStore) InitTable(ctx context.Context) error {
 	_, err := s.pool.Exec(ctx, fmt.Sprintf(`
 		CREATE TABLE IF NOT EXISTS %[1]s (
 			id            BIGSERIAL PRIMARY KEY NOT NULL,
-			code          TEXT NOT NULL,
-			access_token  TEXT NOT NULL,
-			refresh_token TEXT NOT NULL,
-			data          JSONB NOT NULL,
-			created_at    TIMESTAMPTZ NOT NULL,
-			expires_at    TIMESTAMPTZ NOT NULL
+			code          TEXT                  NOT NULL,
+			access_token  TEXT                  NOT NULL,
+			refresh_token TEXT                  NOT NULL,
+			data          JSONB                 NOT NULL,
+			created_at    TIMESTAMPTZ           NOT NULL,
+			expires_at    TIMESTAMPTZ           NOT NULL
 		);
 
 		CREATE INDEX IF NOT EXISTS idx_%[1]s_code_idx ON %[1]s (code);

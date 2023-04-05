@@ -100,11 +100,11 @@ func (s *ClientStore) InitTable(ctx context.Context) error {
 
 	_, err := s.pool.Exec(ctx, fmt.Sprintf(`
 		CREATE TABLE IF NOT EXISTS %[1]s (
-			id     VARCHAR(255) PRIMARY KEY,
-			secret VARCHAR(255) NOT NULL,
-			domain VARCHAR(255) NOT NULL,
-			data   JSONB NOT NULL
-			created_at    TIMESTAMPTZ NOT NULL,
+			    id         VARCHAR(255) PRIMARY KEY,
+				secret     VARCHAR(255) NOT NULL,
+				domain     VARCHAR(255) NOT NULL,
+				data       JSONB        NOT NULL,
+				created_at TIMESTAMPTZ  NOT NULL
 		);
 
 		CREATE INDEX IF NOT EXISTS %[1]s_domain_idx ON %[1]s (domain);`,
