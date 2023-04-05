@@ -60,7 +60,7 @@ func WithClientStoreLogger(logger Logger) ClientStoreOption {
 
 // ClientStoreItem data item
 type ClientStoreItem struct {
-	ID        int64     `db:"id"`
+	ID        string    `db:"id"`
 	Secret    string    `db:"secret"`
 	Domain    string    `db:"domain"`
 	Data      []byte    `db:"data"`
@@ -145,7 +145,7 @@ func (s *ClientStore) Create(info oauth2.ClientInfo) error {
 
 // GetByID returns the client information by key from the store.
 func (s *ClientStore) GetByID(ctx context.Context, id string) (oauth2.ClientInfo, error) {
-	s.logger.Log(ctx, LogLevelDebug, "client get by id", "id", id)
+	s.logger.Log(ctx, LogLevelDebug, "getting client by id", "id", id)
 	row := s.pool.QueryRow(ctx, fmt.Sprintf("SELECT * FROM %s WHERE id = $1", s.table), id)
 	return s.scanToClientInfo(ctx, row)
 }
