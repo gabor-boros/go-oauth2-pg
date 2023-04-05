@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/go-oauth2/oauth2/v4"
+	"github.com/go-oauth2/oauth2/v4/models"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -95,7 +96,7 @@ func (s *TokenStore) scanToTokenInfo(ctx context.Context, row pgx.Row) (oauth2.T
 		return nil, err
 	}
 
-	var info oauth2.TokenInfo
+	var info models.Token
 	if err := json.Unmarshal(item.Data, &info); err != nil {
 		s.logger.Log(ctx, LogLevelError, err.Error())
 		return nil, err
@@ -103,7 +104,7 @@ func (s *TokenStore) scanToTokenInfo(ctx context.Context, row pgx.Row) (oauth2.T
 
 	s.logger.Log(ctx, LogLevelDebug, "token found", "id", item.ID)
 
-	return info, nil
+	return &info, nil
 }
 
 // cleanExpiredTokens removes expired tokens from the store.

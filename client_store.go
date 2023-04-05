@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"github.com/go-oauth2/oauth2/v4"
+	"github.com/go-oauth2/oauth2/v4/models"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
@@ -82,7 +83,7 @@ func (s *ClientStore) scanToClientInfo(ctx context.Context, row pgx.Row) (oauth2
 		return nil, err
 	}
 
-	var info oauth2.ClientInfo
+	var info models.Client
 	err = json.Unmarshal(item.Data, &info)
 	if err != nil {
 		return nil, err
@@ -90,7 +91,7 @@ func (s *ClientStore) scanToClientInfo(ctx context.Context, row pgx.Row) (oauth2
 
 	s.logger.Log(ctx, LogLevelDebug, "client found", "id", item.ID)
 
-	return info, nil
+	return &info, nil
 }
 
 // InitTable initializes the client store table if it does not exist and
