@@ -237,7 +237,7 @@ func (s *TokenStore) RemoveByCode(ctx context.Context, code string) error {
 
 	_, err := s.pool.Exec(ctx, fmt.Sprintf("DELETE FROM %s WHERE code = $1", s.table), code)
 
-	if !errors.Is(err, pgx.ErrNoRows) {
+	if err != nil && !errors.Is(err, pgx.ErrNoRows) {
 		s.logger.Log(ctx, LogLevelError, err.Error())
 		return err
 	}
