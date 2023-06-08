@@ -257,7 +257,7 @@ func (s *TokenStore) RemoveByAccess(ctx context.Context, access string) error {
 
 	_, err := s.pool.Exec(ctx, fmt.Sprintf("DELETE FROM %s WHERE access_token = $1", s.table), access)
 
-	if !errors.Is(err, pgx.ErrNoRows) {
+	if err != nil && !errors.Is(err, pgx.ErrNoRows) {
 		s.logger.Log(ctx, LogLevelError, err.Error())
 		return err
 	}
@@ -277,7 +277,7 @@ func (s *TokenStore) RemoveByRefresh(ctx context.Context, refresh string) error 
 
 	_, err := s.pool.Exec(ctx, fmt.Sprintf("DELETE FROM %s WHERE refresh_token = $1", s.table), refresh)
 
-	if !errors.Is(err, pgx.ErrNoRows) {
+	if err != nil && !errors.Is(err, pgx.ErrNoRows) {
 		s.logger.Log(ctx, LogLevelError, err.Error())
 		return err
 	}
