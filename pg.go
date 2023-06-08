@@ -34,4 +34,4 @@ type Logger interface {
 type NoopLogger struct{}
 
 // Log logs a message.
-func (l *NoopLogger) Log(_ context.Context, level LogLevel, msg string, args ...any) {}
+func (l *NoopLogger) Log(_ context.Context, _ LogLevel, _ string, _ ...any) {}
