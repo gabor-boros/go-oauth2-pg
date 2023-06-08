@@ -16,3 +16,7 @@ All notable changes to this project will be documented in this file.
 
 - Initial implementation ([bd20065](https://github.com/gabor-boros/go-oauth2-arangodb/commit/bd20065220d62c6aafa0ad5610d15f3e73143865))
 
+**Refactor**
+
+- Ignore unused parameters ([a165ca2](https://github.com/gabor-boros/go-oauth2-arangodb/commit/a165ca2f0c31c8861c42cb5f43aa3097618db8bc))
+
